@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://smart-irrigation-backend-it4s.onrender.com/api";
 
 const $ = (id) => document.getElementById(id);
 
