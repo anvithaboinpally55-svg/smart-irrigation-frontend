@@ -4,80 +4,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Irrigation System</title>
+  <meta name="theme-color" content="#176b3a">
+  <title>Smart Irrigation System | IoT Dashboard</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="header">
-    <h1>🌱 Smart Irrigation System</h1>
-    <p>IoT-Based Smart Agriculture Monitoring Dashboard</p>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Smart Irrigation home">
+      <span class="brand-icon">🌱</span>
+      <span>
+        <strong>Smart Irrigation</strong>
+        <small>IoT Monitoring Dashboard</small>
+      </span>
+    </a>
+    <span class="demo-badge"><span class="status-dot"></span> Demo Mode</span>
   </header>
 
-  <main class="container">
-    <div class="demo-notice">
-      Demo Mode: All readings are simulated.
-      No physical sensor or water pump is connected.
-    </div>
-
-    <section class="cards">
-      <article class="card">
-        <h2>🌿 Soil Moisture</h2>
-        <p class="value"><span id="moisture">--</span>%</p>
-        <p id="soil-message">Waiting for data...</p>
-      </article>
-
-      <article class="card">
-        <h2>🌡️ Temperature</h2>
-        <p class="value"><span id="temperature">--</span> °C</p>
-        <p>Simulated ambient temperature</p>
-      </article>
-
-      <article class="card">
-        <h2>💧 Humidity</h2>
-        <p class="value"><span id="humidity">--</span>%</p>
-        <p>Simulated air humidity</p>
-      </article>
-
-      <article class="card">
-        <h2>🚿 Water Pump</h2>
-        <p id="pump-status" class="status">UNKNOWN</p>
-        <p id="pump-message">Waiting for server...</p>
-      </article>
-    </section>
-
-    <section class="panel">
-      <h2>⚙️ Irrigation Controls</h2>
-      <p>Generate a new simulated sensor reading to test the irrigation logic.</p>
-
-      <div class="controls">
-        <label for="moisture-input">Soil moisture (0–100%):</label>
-        <input id="moisture-input" type="number"
-               min="0" max="100" value="25">
-        <button id="simulate-button" type="button">
-          Submit Reading
-        </button>
+  <main class="dashboard">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">SMART AGRICULTURE</p>
+        <h1>Farm Monitoring Dashboard</h1>
+        <p class="muted">Monitor soil conditions and simulate automatic irrigation.</p>
       </div>
-
-      <p id="message" role="status">Connecting to backend...</p>
+      <div id="last-updated" class="muted small">Connecting...</div>
     </section>
 
-    <section class="panel">
-      <h2>📊 Soil Moisture History</h2>
-      <canvas id="moisture-chart" height="220"></canvas>
-      <p>Recent simulated soil moisture readings.</p>
+    <section class="metrics-grid">
+      <article class="card metric-card">
+        <div class="metric-top">
+          <span class="muted">Soil Moisture</span><span class="metric-icon blue">💧</span>
+        </div>
+        <div class="metric-value"><span id="moisture">--</span><span class="unit">%</span></div>
+        <div class="progress-track"><div id="moisture-progress" class="progress-fill"></div></div>
+        <p id="soil-message" class="metric-note">Waiting for readings</p>
+      </article>
+
+      <article class="card metric-card">
+        <div class="metric-top">
+          <span class="muted">Temperature</span><span class="metric-icon orange">🌡️</span>
+        </div>
+        <div class="metric-value"><span id="temperature">--</span><span class="unit">°C</span></div>
+        <p class="metric-note">Simulated ambient temperature</p>
+      </article>
+
+      <article class="card metric-card">
+        <div class="metric-top">
+          <span class="muted">Air Humidity</span><span class="metric-icon blue">☁️</span>
+        </div>
+        <div class="metric-value"><span id="humidity">--</span><span class="unit">%</span></div>
+        <p class="metric-note">Simulated air humidity</p>
+      </article>
+
+      <article class="card metric-card">
+        <div class="metric-top">
+          <span class="muted">Water Pump</span><span class="metric-icon green">⚙️</span>
+        </div>
+        <div class="pump-state">
+          <span id="pump-indicator" class="pump-indicator"></span>
+          <span id="pump-status">--</span>
+        </div>
+        <p id="pump-message" class="metric-note">Waiting for pump status</p>
+      </article>
     </section>
 
-    <section class="panel">
-      <h2>📝 Recent Activity</h2>
-      <ul id="activity-list">
-        <li>Dashboard opened.</li>
+    <section class="main-grid">
+      <article class="card control-card">
+        <p class="eyebrow">MANUAL TESTING</p>
+        <h2>Simulate Soil Moisture</h2>
+        <p class="muted small">Enter a value to test the irrigation logic.</p>
+
+        <form id="simulation-form">
+          <label for="moisture-input">Soil moisture level (%)</label>
+          <div class="input-row">
+            <input id="moisture-input" name="soilMoisture" type="number"
+              min="0" max="100" step="1" value="20" required>
+            <button id="simulate-button" class="primary-button" type="submit">
+              Simulate
+            </button>
+          </div>
+          <div class="range-labels"><span>0% — Dry</span><span>100% — Wet</span></div>
+        </form>
+
+        <div class="threshold-box">
+          <h3>Automatic irrigation rules</h3>
+          <div class="threshold-row"><span class="rule-dot dry"></span><span>Below 30%</span><strong>Pump ON</strong></div>
+          <div class="threshold-row"><span class="rule-dot wet"></span><span>60% and above</span><strong>Pump OFF</strong></div>
+          <p class="muted tiny">Between 30% and 59%, the previous pump state is retained.</p>
+        </div>
+        <p id="message" class="feedback-message" role="status" aria-live="polite">Ready to simulate.</p>
+      </article>
+
+      <article class="card history-card">
+        <div class="history-heading">
+          <div>
+            <p class="eyebrow">TREND ANALYSIS</p>
+            <h2>Soil Moisture History</h2>
+            <p class="muted small">Average soil moisture over time</p>
+          </div>
+          <div class="period-filters" aria-label="History time period">
+            <button type="button" class="period-button active" data-period="day" aria-pressed="true">Day</button>
+            <button type="button" class="period-button" data-period="week" aria-pressed="false">Week</button>
+            <button type="button" class="period-button" data-period="month" aria-pressed="false">Month</button>
+            <button type="button" class="period-button" data-period="year" aria-pressed="false">Year</button>
+          </div>
+        </div>
+
+        <div class="chart-summary">
+          <span id="average-label">Today's average</span>
+          <strong id="average-moisture">--%</strong>
+          <span id="reading-count">0 readings</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="moisture-chart" role="img" aria-label="Soil moisture history chart"></canvas>
+        </div>
+        <p id="chart-message" class="chart-message">Submit simulated readings to build your history.</p>
+      </article>
+    </section>
+
+    <section class="card activity-card">
+      <p class="eyebrow">RECENT EVENTS</p>
+      <h2>Activity History</h2>
+      <ul id="activity-list" class="activity-list">
+        <li class="empty-activity">No activity yet. Submit a simulated reading.</li>
       </ul>
     </section>
-  </main>
 
-  <footer>
-    Smart Irrigation System Using IoT | Undergraduate Project
-  </footer>
+    <aside class="demo-notice">
+      <span>ℹ️</span>
+      <p><strong>Academic prototype:</strong> Sensor readings and pump status are simulated in software. No physical sensors or water pump are connected.</p>
+    </aside>
+
+    <footer class="footer">Smart Irrigation System Using IoT · Student Project Prototype</footer>
+  </main>
 
   <script src="app.js"></script>
 </body>
