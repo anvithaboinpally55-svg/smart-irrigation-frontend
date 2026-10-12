@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Irrigation System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1>🌱 Smart Irrigation System</h1>
+    <p>IoT-Based Smart Agriculture Monitoring Dashboard</p>
+  </header>
+
+  <main class="container">
+    <div class="demo-notice">
+      Demo Mode: All readings are simulated.
+      No physical sensor or water pump is connected.
+    </div>
+
+    <section class="cards">
+      <article class="card">
+        <h2>🌿 Soil Moisture</h2>
+        <p class="value"><span id="moisture">--</span>%</p>
+        <p id="soil-message">Waiting for data...</p>
+      </article>
+
+      <article class="card">
+        <h2>🌡️ Temperature</h2>
+        <p class="value"><span id="temperature">--</span> °C</p>
+        <p>Simulated ambient temperature</p>
+      </article>
+
+      <article class="card">
+        <h2>💧 Humidity</h2>
+        <p class="value"><span id="humidity">--</span>%</p>
+        <p>Simulated air humidity</p>
+      </article>
+
+      <article class="card">
+        <h2>🚿 Water Pump</h2>
+        <p id="pump-status" class="status">UNKNOWN</p>
+        <p id="pump-message">Waiting for server...</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>⚙️ Irrigation Controls</h2>
+      <p>Generate a new simulated sensor reading to test the irrigation logic.</p>
+
+      <div class="controls">
+        <label for="moisture-input">Soil moisture (0–100%):</label>
+        <input id="moisture-input" type="number"
+               min="0" max="100" value="25">
+        <button id="simulate-button" type="button">
+          Submit Reading
+        </button>
+      </div>
+
+      <p id="message" role="status">Connecting to backend...</p>
+    </section>
+
+    <section class="panel">
+      <h2>📊 Soil Moisture History</h2>
+      <canvas id="moisture-chart" height="220"></canvas>
+      <p>Recent simulated soil moisture readings.</p>
+    </section>
+
+    <section class="panel">
+      <h2>📝 Recent Activity</h2>
+      <ul id="activity-list">
+        <li>Dashboard opened.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Smart Irrigation System Using IoT | Undergraduate Project
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

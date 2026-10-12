@@ -1,0 +1,182 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f7f1;
+  color: #243b2a;
+  line-height: 1.6;
+}
+
+.header {
+  background: #176b3a;
+  color: white;
+  text-align: center;
+  padding: 28px 16px;
+}
+
+.header h1 {
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.header p {
+  color: #d8f3dc;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 0 18px;
+}
+
+.demo-notice {
+  background: #fff3cd;
+  color: #765500;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 22px;
+  text-align: center;
+  border: 1px solid #f0d98c;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card,
+.panel {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #00000012;
+}
+
+.card h2 {
+  font-size: 17px;
+  color: #607568;
+  margin-bottom: 14px;
+}
+
+.value {
+  font-size: 34px;
+  font-weight: bold;
+  color: #176b3a;
+  margin-bottom: 6px;
+}
+
+.status {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #eeeeee;
+  color: #555555;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.status.on {
+  background: #d8f3dc;
+  color: #176b3a;
+}
+
+.status.off {
+  background: #fce8e6;
+  color: #b3261e;
+}
+
+.panel {
+  margin-top: 22px;
+}
+
+.panel h2 {
+  color: #176b3a;
+  margin-bottom: 14px;
+  font-size: 21px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+input[type="number"] {
+  width: 130px;
+  padding: 11px;
+  border: 1px solid #cbd8ce;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+button {
+  background: #176b3a;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 12px 18px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #10552d;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #80bd91;
+  outline-offset: 2px;
+}
+
+#message {
+  margin-top: 16px;
+  color: #176b3a;
+  font-weight: bold;
+}
+
+#activity-list {
+  padding-left: 22px;
+  line-height: 2;
+}
+
+#moisture-chart {
+  width: 100%;
+  display: block;
+  margin: 12px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 26px 16px;
+  color: #607568;
+}
+
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .card,
+  .panel {
+    padding: 18px;
+  }
+
+  .controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  input[type="number"],
+  button {
+    width: 100%;
+  }
+}
