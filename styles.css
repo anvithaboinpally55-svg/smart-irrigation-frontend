@@ -31,7 +31,7 @@ body {
       rgba(13, 43, 23, 0.20),
       rgba(13, 43, 23, 0.30)
     ),
-    url("./images/farm-background.jpg");
+    url("./farm-background.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
